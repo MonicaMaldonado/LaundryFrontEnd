@@ -1,0 +1,61 @@
+<h2 style="margin-top: 15px; margin-left: 10px;">Detalle de Orden</h2>
+<span></span>
+<br>
+
+<mat-dialog-content>
+    <div class="modal-container" >
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+            <mat-form-field class="full-width">
+                <mat-label>Servicio</mat-label>
+                    <mat-select formControlName="servicio" #servicio  [(ngModel)]="servicio" (selectionChange)="selected($event)">
+                        <mat-option *ngFor="let serv of services" [value]="serv.id">
+                            {{serv.descripcion}} - {{serv.costo}}
+                        </mat-option>
+                    </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-label>Estado</mat-label>
+                <mat-select formControlName="estado" [(ngModel)]="estado">
+                    <mat-option value="R">Recibido</mat-option>
+                    <mat-option value="EP">En proceso</mat-option>
+                    <mat-option value="C">Completo</mat-option>
+                    <mat-option value="E">Entegado</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-label>Comentario</mat-label>
+                <textarea matInput type="test" formControlName="comentario" [(ngModel)]="comentario" maxlength="60"></textarea>
+            </mat-form-field>
+            
+            <mat-form-field class="full-width" >
+                <mat-label>Fecha Entrega</mat-label>
+                <input matInput  [matDatepicker]="pickerdf" formControlName="fechaEntrega" [(ngModel)]="fechaEntrega">
+                <mat-datepicker-toggle matSuffix [for]="pickerdf"></mat-datepicker-toggle>
+                <mat-datepicker #pickerdf></mat-datepicker>
+            </mat-form-field>
+        <!-- 
+            <mat-form-field style="width: 40%;">
+                <input matInput [matTimepicker]="minutesPicker">
+                <mat-timepicker-toggle matIconSuffix [for]="minutesPicker"/>
+                <mat-timepicker interval="45min" #minutesPicker/>
+              </mat-form-field>
+           
+ -->
+
+
+            <mat-form-field class="full-width">
+                <mat-label>Valor</mat-label>
+                <input matInput type="number" formControlName="valor" [(ngModel)]="valor" required />
+            </mat-form-field>
+        </form>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <!-- <button mat-button (click)="onNoClick()">Cerrar</button> -->
+    
+    <button type="submit"><i class="fa fa-database"></i> Submit</button>
+    <button mat-raised-button  (click)="prueba(form)">Agregar</button>
+  </mat-dialog-actions>

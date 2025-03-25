@@ -1,0 +1,28 @@
+/* host :p {
+    font-size: 10px;
+}*/
+
+
+.client-list-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.search-box {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.client-grid {
+    display: grid;
+    grid-template-columns: repeat((auto-fit, minmax(300px, 1fr)));
+}
+
+.client-card {
+    transition: transform 0.3 ease-in-out ;
+}
+
+.client-card :hover {
+    transform: scale(1.05);
+}

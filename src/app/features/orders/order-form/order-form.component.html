@@ -1,0 +1,102 @@
+
+
+
+<div>
+   <!--  <h2>{{ isEditMode() ? 'Editar orden de venta' : 'Nueva orden de venta' }}</h2> -->
+   <h2 style="margin-top: 15px; margin-left: 10px;">Orden de Venta</h2>
+    
+    <form [formGroup]="form">
+        <mat-form-field class="full-width">
+            <mat-label>Cliente</mat-label>
+            <mat-select formControlName="cliente">
+                <mat-option *ngFor="let cli of clientes" [value]="cli.id">
+                    {{cli.nombres}}  {{cli.apellidos}}
+               </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Fecha Recepcion</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechaRecepcion" required >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field class="full-width">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="estado">
+                <mat-option value="R">Recibido</mat-option>
+                <mat-option value="EP">En proceso</mat-option>
+                <mat-option value="C">Completo</mat-option>
+                <mat-option value="E">Entegado</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Fecha Entrega</mat-label>
+            <input matInput  [matDatepicker]="pickerf" formControlName="fechaEntrega" >
+            <mat-datepicker-toggle matSuffix [for]="pickerf"></mat-datepicker-toggle>
+            <mat-datepicker #pickerf></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Comentario</mat-label>
+            <textarea matInput type="test" formControlName="comentario" maxlength="60"></textarea>
+        </mat-form-field>
+    </form>
+    
+
+    <div class="form-group-detail">
+        <table style="width: 100%;">
+
+            <thead style="background-color: lightblue; height: 2rem;">
+              <th style="width: 20%;">Servicio</th>
+              <th style="width: 20%;">Estado</th>
+              <th style="width: 20%;">Comentario</th>
+              <th style="width: 20%;">Fecha Entrega</th>
+              <th style="width: 20%;">Valor</th>
+
+            </thead> 
+            <tbody>
+                <tr *ngIf="ordenDetalles.length === 0">
+                    <td  style="font-style: italic; text-align: center;" colspan="5">
+                        No detalle de orden seleccionado para este
+                    </td>
+                </tr>
+                <tr 
+                    *ngFor="let item of ordenDetalles;">
+                    <td>{{item.servicioNombre}}</td>
+                    <td style="text-align: center;">{{item.estado}} </td>
+                    <td>{{item.comentario}} </td>
+                    <td>{{item.fechaEntrega}} </td>
+                    <td style="text-align: right;">{{item.valor}}</td>
+              
+                </tr>
+            </tbody>
+        </table>
+
+       <!-- 
+         <ng-container matColumnDef="servicio">
+            <th mat-header-cell *matHeaderCellDef>Servicio</th>
+            <td mat-cell *matCellDef="let element">{{ element.servicio}}</td>
+        </ng-container>  -->
+
+        <!-- <mat-form-field class="half-width">
+            <mat-label>Valor</mat-label>
+            <input matInput type="number" formControlName="valor" required />
+        </mat-form-field> -->
+        <div  class="modal-container">
+           <!--  <button mat-raised-button color="primary" (click)="openDialog()" style="margin-left: 1%;"> Agregar</button>
+ -->
+            <button mat-icon-button (click)="openDialog()">
+                <mat-icon>add</mat-icon>
+              </button>
+        </div>
+    </div>
+    <br>
+    <div style="padding-left:1%">
+        <button  mat-raised-button color="primary" (click)="saveOrder()">Guardar</button>
+        <button mat-button color="warn" routerLink="/">Cancelar</button>
+    </div>
+   
+</div>

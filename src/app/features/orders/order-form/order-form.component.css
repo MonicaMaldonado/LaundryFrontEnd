@@ -1,0 +1,39 @@
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 2%;
+   /* gap: 15px; */
+  }
+
+  
+.full-width {
+    /*grid-column: span 2;*/
+  }
+
+.half-width { 
+    grid-column: span;
+    margin-left: 1%;
+  }
+
+  .button-container {
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .form-group-detail {
+    display: flex;
+    padding-left: 4%;
+    padding-right: 2%;
+ /*   height: 55%;*/
+  }
+
+.mat-mdc-dialog-panel {
+  width: 40%;
+}
+
+mat-form-field {
+  padding-left: 3%;
+  padding-right: 3%;
+}
