@@ -5,12 +5,12 @@ form {
    /* gap: 15px; */
   }
 
-  
+
 .full-width {
     /*grid-column: span 2;*/
   }
 
-.half-width { 
+.half-width {
     grid-column: span;
     margin-left: 1%;
   }
@@ -36,4 +36,11 @@ form {
 mat-form-field {
   padding-left: 3%;
   padding-right: 3%;
+}
+
+.total-left {
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 3%;
 }

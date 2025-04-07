@@ -6,6 +6,7 @@ export interface Client {
     estado: string;
     ruc: string | null | undefined;
     idLocal: string;
+    local: string;
     //ruc?: string;  //propiedad opcional
     //price: number;
 }

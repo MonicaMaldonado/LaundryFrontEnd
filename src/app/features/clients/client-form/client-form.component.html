@@ -1,0 +1,32 @@
+<div>
+  <h2 style="margin-top: 15px; margin-left: 10px;">Crear Cliente</h2>
+
+  <form [formGroup]="form">
+    <mat-form-field class="full-width">
+      <mat-label>Nombres</mat-label>
+      <input matInput type="text" formControlName="nombres" required />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Apellidos</mat-label>
+      <input matInput type="text" formControlName="apellidos" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>RUC</mat-label>
+      <input matInput type="number" formControlName="ruc" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Telefono</mat-label>
+      <input matInput type="text" formControlName="telefono" />
+    </mat-form-field>
+
+    <div class="button-container">
+      <button mat-raised-button (click)="saveClient()">Guardar</button>
+      <button mat-stroked-button color="warn"> Cancelar </button>
+    </div>
+
+  </form>
+
+</div>

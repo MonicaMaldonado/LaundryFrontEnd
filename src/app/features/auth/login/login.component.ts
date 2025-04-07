@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/interceptors/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { OrderService } from '../../orders/order.service.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,9 @@ export class LoginComponent {
   nombre = '';
   password = '';
 
-  constructor(private authService: AuthService, private router: Router, private snackBar : MatSnackBar) { }
+  constructor(private authService: AuthService,
+     private orderService : OrderService,
+     private router: Router, private snackBar : MatSnackBar) { }
 
   onLogin() {
     this.authService.login({ username: this.nombre, password: this.password})
@@ -30,7 +33,19 @@ export class LoginComponent {
                         duration: 3000
                       })
     });
+
+    this.orderService.getLastOrderI().subscribe({
+      next: (data) => {
+        if (data) {
+          localStorage.setItem('idOrder', data.toString());
+        } else {
+          localStorage.removeItem('idOrder');
+        }
+      },
+      error: (err) => console.error(err)
+    })
+
   }
 
 }
-    
+

@@ -8,5 +8,16 @@
 .order-grid {
     display: grid;
     grid-template-columns: repeat((auto-fit, minmax(300px, 1fr)));
-    
+
+}
+
+.mat-mdc-table {
+  display: inline-table;
+}
+
+
+
+
+.mat-column-fechaRecepcio {
+  width: 15%;
 }

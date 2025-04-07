@@ -9,21 +9,26 @@ import { roleGuard } from './core/role.guard';
 import { OrderListComponent } from './features/orders/order-list/order-list.component';
 import { OrderFormComponent } from './features/orders/order-form/order-form.component';
 import { OrderItemComponent } from './features/orders/order-item/order-item.component';
+import { ClientFormComponent } from './features/clients/client-form/client-form.component';
+import { ServiceListComponent } from './features/servicios/service-list/service-list.component';
 
 export const routes: Routes = [
-    {path:'clients', 
-        component: ClientListComponent, 
+    {path:'clients',
+        component: ClientListComponent,
         canActivate: [authGuard]},
-    {path: '', component: ServicesComponent},
+    {path: 'client/new', component: ClientFormComponent},
+    {path: 'servicios', component: ServiceListComponent},
+    {path: '', component: LoginComponent},
     {path:'login', component: LoginComponent},
     {path:'dashboard', component: DashboardComponent},
-    {path:'promotion/new', 
+    {path:'promotion/new',
         component: PromotionComponent,
         canActivate: [authGuard, roleGuard],
         data: {role: 'Administrador'}},
     {path:'order', component: OrderListComponent, canActivate: [authGuard]},
-    {path:'order/item', component: OrderItemComponent},
+    //{path:'order/item', component: OrderItemComponent},
     {path:'order/new', component: OrderFormComponent,
-   //      canActivate: [authGuard]
-        }
+         canActivate: [authGuard]
+        },
+
 ];

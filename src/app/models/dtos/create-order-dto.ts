@@ -1,4 +1,5 @@
 export interface CreateOrderRequestDto  {
+    id : number,
     idCliente : number,
     fechaRecepcion : Date,
     comentario : string,

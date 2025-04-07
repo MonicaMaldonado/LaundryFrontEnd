@@ -1,0 +1,12 @@
+.full-width {
+ display: grid;
+ width: 90%;
+}
+
+.button-container {
+  gap: 8px;
+  grid-column: span;
+  display: inline-flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

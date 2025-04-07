@@ -19,8 +19,8 @@ export class ServicesService {
 
   }
 
-  getServicioById(id : string) 
+  getServicioById(id : number) 
     :Observable<Service> {
-      return this.http.get<Service>(`${this.apiUrl}/api/servicio/${id}`);
+      return this.http.get<Service>(`${this.apiUrl}/api/servicios/${id}`);
     }
 }

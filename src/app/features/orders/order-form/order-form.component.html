@@ -3,26 +3,38 @@
 
 <div>
    <!--  <h2>{{ isEditMode() ? 'Editar orden de venta' : 'Nueva orden de venta' }}</h2> -->
-   <h2 style="margin-top: 15px; margin-left: 10px;">Orden de Venta</h2>
-    
+   <h2 style="margin-top: 15px; margin-left: 10px;">Orden de Venta - {{ lastOrderId }}</h2>
+
     <form [formGroup]="form">
         <mat-form-field class="full-width">
             <mat-label>Cliente</mat-label>
-            <mat-select formControlName="cliente">
+            <mat-select formControlName="cliente" (selectionChange)="setCliente($event.value)">
                 <mat-option *ngFor="let cli of clientes" [value]="cli.id">
                     {{cli.nombres}}  {{cli.apellidos}}
                </mat-option>
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
+        <div style="display: flex;">
+          <mat-form-field class="full-width">
             <mat-label>Fecha Recepcion</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="fechaRecepcion" required >
+            <input matInput [matDatepicker]="picker" [formControl]="deshabilitar" formControlName="fechaRecepcion" readonly >
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        
-        <mat-form-field class="full-width">
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>Hora Recepcion</mat-label>
+          <input  matInput [formControl]="formControl" [matTimepicker]="timePicker">
+          <mat-timepicker-toggle matIconSuffix [for]="timePicker"></mat-timepicker-toggle>
+
+          <mat-timepicker #timePicker interval="3min"></mat-timepicker>
+        </mat-form-field>
+        </div>
+
+
+      <!--   <mat-form-field class="full-width">
             <mat-label>Estado</mat-label>
             <mat-select formControlName="estado">
                 <mat-option value="R">Recibido</mat-option>
@@ -30,21 +42,26 @@
                 <mat-option value="C">Completo</mat-option>
                 <mat-option value="E">Entegado</mat-option>
             </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="full-width">
+        <!-- <mat-form-field class="full-width">
             <mat-label>Fecha Entrega</mat-label>
             <input matInput  [matDatepicker]="pickerf" formControlName="fechaEntrega" >
             <mat-datepicker-toggle matSuffix [for]="pickerf"></mat-datepicker-toggle>
             <mat-datepicker #pickerf></mat-datepicker>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field class="full-width">
             <mat-label>Comentario</mat-label>
             <textarea matInput type="test" formControlName="comentario" maxlength="60"></textarea>
         </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Valor</mat-label>
+            <input matInput type="number" formControlName="valor" readonly />
+        </mat-form-field>
     </form>
-    
+
 
     <div class="form-group-detail">
         <table style="width: 100%;">
@@ -56,26 +73,26 @@
               <th style="width: 20%;">Fecha Entrega</th>
               <th style="width: 20%;">Valor</th>
 
-            </thead> 
+            </thead>
             <tbody>
                 <tr *ngIf="ordenDetalles.length === 0">
                     <td  style="font-style: italic; text-align: center;" colspan="5">
                         No detalle de orden seleccionado para este
                     </td>
                 </tr>
-                <tr 
+                <tr
                     *ngFor="let item of ordenDetalles;">
                     <td>{{item.servicioNombre}}</td>
                     <td style="text-align: center;">{{item.estado}} </td>
                     <td>{{item.comentario}} </td>
                     <td>{{item.fechaEntrega}} </td>
                     <td style="text-align: right;">{{item.valor}}</td>
-              
+
                 </tr>
             </tbody>
         </table>
 
-       <!-- 
+       <!--
          <ng-container matColumnDef="servicio">
             <th mat-header-cell *matHeaderCellDef>Servicio</th>
             <td mat-cell *matCellDef="let element">{{ element.servicio}}</td>
@@ -94,9 +111,17 @@
         </div>
     </div>
     <br>
-    <div style="padding-left:1%">
-        <button  mat-raised-button color="primary" (click)="saveOrder()">Guardar</button>
-        <button mat-button color="warn" routerLink="/">Cancelar</button>
+    <br>
+    <div>
+      <label class="total-left">Total: {{sumaTotal}}</label>
     </div>
-   
+
+
+
+
+    <div style="padding-left:1%">
+        <button style="background-color:rgb(152, 197, 208);"  mat-raised-button color="violet" (click)="saveOrder()">Guardar</button>
+        <button style="padding-left: 20px;" mat-button color="violet" routerLink="/">Cancelar</button>
+    </div>
+
 </div>
